@@ -7,7 +7,7 @@ android {
     defaultConfig {
         minSdkVersion project.minSdk
         targetSdkVersion project.sdk
-        applicationId "com.meetic.poppers.sample"
+        applicationId "com.meetic.marypopup.sample"
         versionCode 1
         versionName "1.0"
     }
