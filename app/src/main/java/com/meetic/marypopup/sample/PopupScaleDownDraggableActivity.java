@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.meetic.poppers.Poppers;
+import com.meetic.marypopup.MaryPopup;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -15,14 +15,14 @@ import butterknife.OnClick;
 public class PopupScaleDownDraggableActivity extends AppCompatActivity {
 
     @Bind(R.id.cardView) View cardView;
-    Poppers poppers;
+    MaryPopup popup;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_popup);
         ButterKnife.bind(this);
-        poppers = Poppers.with(this)
+        popup = MaryPopup.with(this)
             .cancellable(true)
             .draggable(true)
             .scaleDownDragging(true)
@@ -32,7 +32,7 @@ public class PopupScaleDownDraggableActivity extends AppCompatActivity {
 
     @OnClick(R.id.cardView)
     public void onClickCardView() {
-        poppers
+        popup
             .content(R.layout.popup_content)
             .from(cardView)
             .show();
@@ -40,8 +40,8 @@ public class PopupScaleDownDraggableActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(poppers.isOpened()){
-            poppers.close(true);
+        if(popup.isOpened()){
+            popup.close(true);
         } else {
             super.onBackPressed();
         }

@@ -1,4 +1,4 @@
-package com.meetic.poppers;
+package com.meetic.marypopup;
 
 import android.graphics.Rect;
 import android.support.v4.view.ViewCompat;

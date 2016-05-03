@@ -1,4 +1,4 @@
-package com.meetic.poppers.sample;
+package com.meetic.marypopup.sample;
 
 import android.content.Intent;
 import android.os.Bundle;
