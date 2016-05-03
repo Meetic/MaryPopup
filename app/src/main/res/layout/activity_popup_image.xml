@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"/>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"
+        android:columnCount="4"
+        tools:targetApi="ice_cream_sandwich">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="100dp"
+            android:layout_height="130dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/effeil_small"
+            />
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="130dp"
+            android:adjustViewBounds="true"
+            android:padding="3dp"
+            android:src="#AAAAAA"/>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="130dp"
+            android:adjustViewBounds="true"
+            android:padding="3dp"
+            android:src="#AAAAAA"/>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="130dp"
+            android:adjustViewBounds="true"
+            android:padding="3dp"
+            android:src="#AAAAAA"/>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="130dp"
+            android:adjustViewBounds="true"
+            android:padding="3dp"
+            android:src="#AAAAAA"/>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="130dp"
+            android:adjustViewBounds="true"
+            android:padding="3dp"
+            android:src="#AAAAAA"/>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="130dp"
+            android:adjustViewBounds="true"
+            android:padding="3dp"
+            android:src="#AAAAAA"/>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="130dp"
+            android:adjustViewBounds="true"
+            android:padding="3dp"
+            android:src="#AAAAAA"/>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="130dp"
+            android:adjustViewBounds="true"
+            android:padding="3dp"
+            android:src="#AAAAAA"/>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="130dp"
+            android:adjustViewBounds="true"
+            android:padding="3dp"
+            android:src="#AAAAAA"/>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="130dp"
+            android:adjustViewBounds="true"
+            android:padding="3dp"
+            android:src="#AAAAAA"/>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="130dp"
+            android:adjustViewBounds="true"
+            android:padding="3dp"
+            android:src="#AAAAAA"/>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="130dp"
+            android:adjustViewBounds="true"
+            android:padding="3dp"
+            android:src="#AAAAAA"/>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="130dp"
+            android:adjustViewBounds="true"
+            android:padding="3dp"
+            android:src="#AAAAAA"/>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="130dp"
+            android:adjustViewBounds="true"
+            android:padding="3dp"
+            android:src="#AAAAAA"/>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="130dp"
+            android:adjustViewBounds="true"
+            android:padding="3dp"
+            android:src="#AAAAAA"/>
+
+    </GridLayout>
+</LinearLayout>

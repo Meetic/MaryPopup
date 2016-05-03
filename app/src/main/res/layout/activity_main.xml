@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"/>
+
+    <Button
+        android:id="@+id/popup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="popup"/>
+
+    <Button
+        android:id="@+id/popupNotDraggable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="popup not draggable"/>
+
+    <Button
+        android:id="@+id/popupDraggable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="popup draggable"/>
+
+    <Button
+        android:id="@+id/popupFadeOutDraggable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="popup fade out"/>
+
+    <Button
+        android:id="@+id/popupScaleDownDraggable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="popup scale down"/>
+
+    <Button
+        android:id="@+id/popupCenter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="popup center"/>
+
+    <Button
+        android:id="@+id/popupImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="popup image"/>
+
+</LinearLayout>

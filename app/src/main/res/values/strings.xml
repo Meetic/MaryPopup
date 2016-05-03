@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PoppersSample</string>
+    <string name="message">Check an email for a confirmation, We\'ll se you at <b>11:00am</b> on <b>Thur 15 Aug.</b></string>
+    <string name="title">All Set</string>
+</resources>
