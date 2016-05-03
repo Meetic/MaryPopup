@@ -98,8 +98,8 @@ public void onBackPressed() {
 
 Add into your **build.gradle**
 
-[![Download](https://api.bintray.com/packages/-------/images/download.svg)](https://bintray.com/-------/_latestVersion)
-
+[ ![Download](https://api.bintray.com/packages/meetic-android/maven/MaryPopup/images/download.svg) ](https://bintray.com/meetic-android/maven/MaryPopup/_latestVersion)
+ 
 ```groovy
 compile 'com.meetic.marypopup:marypopup:(last version)
 compile 'com.meetic.dragueur:dragueur:1.0.0
@@ -133,7 +133,6 @@ Contributor: [Florent Champigny][florent]
     limitations under the License.
 
 [repo]: https://github.com/Meetic/MaryPopup
-[bintray]: https://bintray.com/-------/_latestVersion
 [androidarsenal]: http://android-arsenal.com/details/--------
 [meetic]: http://www.meetic.fr/
 [dragueur]: https://github.com/-----
