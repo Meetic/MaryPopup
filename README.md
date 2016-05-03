@@ -102,7 +102,7 @@ Add into your **build.gradle**
  
 ```groovy
 compile 'com.meetic.marypopup:marypopup:(last version)
-compile 'com.meetic.dragueur:dragueur:1.0.0
+compile 'com.meetic.dragueur:dragueur:1.0.0'
 ```
 
 # Credits
