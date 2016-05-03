@@ -6,7 +6,7 @@ MaryPopup
 
 Expand your view with no problem ;) 
 
-[![intro](media/marypopup.gif)][repo]
+[![intro](media/intro.gif)][repo]
 
 # Usage
 

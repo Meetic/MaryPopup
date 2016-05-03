@@ -30,10 +30,10 @@ dependencies {
 ext {
     bintrayRepo = 'maven'
     bintrayName = 'marypopup'
-    orgName = 'meetic'
+    orgName = 'meetic-android'
 
     publishedGroupId = 'com.meetic.marypopup'
-    libraryName = 'Dragueur'
+    libraryName = 'MaryPopup'
     artifact = 'MaryPopup'
 
     libraryDescription = 'MaryPopup'
@@ -43,8 +43,8 @@ ext {
 
     libraryVersion = rootProject.ext.libraryVersion
 
-    developerId = 'meetic'
-    developerName = 'meetic'
+    developerId = 'meetic-android'
+    developerName = 'meetic-android'
     developerEmail = 'champigny.florent@gmail.com'
 
     licenseName = 'The Apache Software License, Version 2.0'
