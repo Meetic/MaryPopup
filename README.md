@@ -92,8 +92,6 @@ public void onBackPressed() {
 }
 ```
 
-[![fadeout](media/photo.gif)][photo]
-
 # Download
 
 Add into your **build.gradle**
