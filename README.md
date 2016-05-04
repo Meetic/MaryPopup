@@ -2,10 +2,11 @@ MaryPopup
 =======
 
 [![API](https://img.shields.io/badge/API-10%2B-green.svg)][repo]
+[![Build Status](https://travis-ci.org/Meetic/MaryPopup.svg?branch=master)](https://travis-ci.org/Meetic/MaryPopup)
 
 Expand your view with no problem ;) 
 
-[![intro](media/intro.gif)][repo][![fadeout](media/photo.gif)][photo]
+[![intro](media/intro.gif)][repo][![fadeout](media/photo.gif)][repo]
 
 
 # Usage
@@ -103,6 +104,8 @@ compile 'com.meetic.marypopup:marypopup:(last version)'
 compile 'com.meetic.dragueur:dragueur:1.0.0'
 ```
 
+Move your views with [Dragueur][Dragueur] !
+
 # Credits
 
 A project initiated by Meetic
@@ -133,5 +136,5 @@ Contributor: [Florent Champigny][florent]
 [repo]: https://github.com/Meetic/MaryPopup
 [androidarsenal]: http://android-arsenal.com/details/--------
 [meetic]: http://www.meetic.fr/
-[dragueur]: https://github.com/-----
+[dragueur]: https://github.com/Meetic/Dragueur
 [florent]: https://github.com/florent37
