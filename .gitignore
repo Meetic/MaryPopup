@@ -35,5 +35,4 @@ build/
 #NDK
 obj/
 
-gradle/wrapper
 **/build/*
