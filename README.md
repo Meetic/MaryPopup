@@ -6,7 +6,8 @@ MaryPopup
 
 Expand your view with no problem ;) 
 
-[![intro](media/intro.gif)][repo]
+[![intro](media/intro.gif)][repo][![fadeout](media/photo.gif)][photo]
+
 
 # Usage
 
@@ -101,7 +102,7 @@ Add into your **build.gradle**
 [ ![Download](https://api.bintray.com/packages/meetic-android/maven/MaryPopup/images/download.svg) ](https://bintray.com/meetic-android/maven/MaryPopup/_latestVersion)
  
 ```groovy
-compile 'com.meetic.marypopup:marypopup:(last version)
+compile 'com.meetic.marypopup:marypopup:(last version)'
 compile 'com.meetic.dragueur:dragueur:1.0.0'
 ```
 
