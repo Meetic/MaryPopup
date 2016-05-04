@@ -5,7 +5,7 @@ MaryPopup
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-MaryPopup-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/3531)
 [![Build Status](https://travis-ci.org/Meetic/MaryPopup.svg?branch=master)](https://travis-ci.org/Meetic/MaryPopup)
 
-Expand your view with no problem ;) 
+Expand your view with no problem ;)
 
 [![intro](media/intro.gif)][repo][![fadeout](media/photo.gif)][repo]
 
@@ -99,8 +99,12 @@ public void onBackPressed() {
 Add into your **build.gradle**
 
 [ ![Download](https://api.bintray.com/packages/meetic-android/maven/MaryPopup/images/download.svg) ](https://bintray.com/meetic-android/maven/MaryPopup/_latestVersion)
- 
+
 ```groovy
+repositories {
+  maven { url "http://dl.bintray.com/meetic-android/maven" }
+}
+
 compile 'com.meetic.marypopup:marypopup:(last version)'
 compile 'com.meetic.dragueur:dragueur:1.0.0'
 ```
