@@ -2,6 +2,7 @@ MaryPopup
 =======
 
 [![API](https://img.shields.io/badge/API-10%2B-green.svg)][repo]
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-MaryPopup-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/3531)
 [![Build Status](https://travis-ci.org/Meetic/MaryPopup.svg?branch=master)](https://travis-ci.org/Meetic/MaryPopup)
 
 Expand your view with no problem ;) 
