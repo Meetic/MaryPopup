@@ -101,12 +101,8 @@ Add into your **build.gradle**
 [ ![Download](https://api.bintray.com/packages/meetic-android/maven/MaryPopup/images/download.svg) ](https://bintray.com/meetic-android/maven/MaryPopup/_latestVersion)
 
 ```groovy
-repositories {
-  maven { url "http://dl.bintray.com/meetic-android/maven" }
-}
-
 compile 'com.meetic.marypopup:marypopup:(last version)'
-compile 'com.meetic.dragueur:dragueur:1.0.0'
+compile 'com.meetic.dragueur:dragueur:1.0.3'
 ```
 
 Move your views with [Dragueur][Dragueur] !
