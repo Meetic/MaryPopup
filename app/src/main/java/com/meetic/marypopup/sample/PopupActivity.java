@@ -20,15 +20,23 @@ public class PopupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setUpPopup();
+    }
+
+    protected void setUpPopup() {
         setContentView(R.layout.activity_popup);
         ButterKnife.bind(this);
-        popup = MaryPopup.with(this)
-            .cancellable(true)
-            .draggable(true)
-            .scaleDownDragging(true)
-            .fadeOutDragging(true)
-            .blackOverlayColor(Color.parseColor("#DD444444"))
-            .backgroundColor(Color.parseColor("#EFF4F5"));
+        popup = createMaryPopup()
+                .draggable(true)
+                .scaleDownDragging(true)
+                .fadeOutDragging(true);
+    }
+
+    protected MaryPopup createMaryPopup() {
+        return MaryPopup.with(this)
+                .cancellable(true)
+                .blackOverlayColor(Color.parseColor("#DD444444"))
+                .backgroundColor(Color.parseColor("#EFF4F5"));
     }
 
     @OnClick(R.id.cardView)
@@ -41,7 +49,7 @@ public class PopupActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(popup.isOpened()){
+        if (popup.isOpened()){
             popup.close(true);
         } else {
             super.onBackPressed();

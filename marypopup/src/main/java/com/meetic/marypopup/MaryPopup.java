@@ -23,6 +23,13 @@ import java.lang.ref.WeakReference;
  */
 public class MaryPopup implements View.OnClickListener {
 
+    public static final float DRAGGABLE_VIEW_MAX_DRAG_PERCENTAGE_Y = 0.35f;
+    public static final String BLACK_OVERLAY_COLOR = "#CC333333";
+    public static final float SCALE_DOWN_DRAGGING_MAX_PERCENTAGE = 0.75f;
+    public static final float DURX_PIVOT_X_PERCENTAGE = 0.5f;
+    public static final int OPEN_DURATION_DELAY_OFFSET = 100;
+    public static final int POPUP_VIEW_BASE_ELEVATION = 6;
+
     final Activity activity;
     final ViewGroup activityView;
     final View actionBarView;
@@ -31,7 +38,7 @@ public class MaryPopup implements View.OnClickListener {
 
     @Nullable
     View blackOverlay;
-    int blackOverlayColor = Color.parseColor("#CC333333");
+    int blackOverlayColor = Color.parseColor(BLACK_OVERLAY_COLOR);
 
     @Nullable
     ViewGroup popupView;
@@ -163,80 +170,71 @@ public class MaryPopup implements View.OnClickListener {
 
     public void show() {
         if (blackOverlay == null) {
-            {
-                handleClick = false;
-                blackOverlay = new View(activity);
-                blackOverlay.setBackgroundColor(blackOverlayColor);
-                activityView.addView(blackOverlay, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-                DurX.putOn(blackOverlay)
+            handleClick = false;
+            blackOverlay = new View(activity);
+            blackOverlay.setBackgroundColor(blackOverlayColor);
+            activityView.addView(blackOverlay, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            DurX.putOn(blackOverlay)
                     .animate()
                     .alpha(0f, 1f);
-                blackOverlay.setOnClickListener(this);
-            }
-            {
-                if (draggable) {
-                    popupView = (ViewGroup) LayoutInflater.from(activity).inflate(R.layout.popup_layout_draggable, activityView, false);
-                } else {
-                    popupView = (ViewGroup) LayoutInflater.from(activity).inflate(R.layout.popup_layout, activityView, false);
-                }
-                if (popupView != null) {
-                    if (width >= 0) {
-                        ViewGroup.LayoutParams layoutParams = popupView.getLayoutParams();
-                        layoutParams.width = width;
-                        popupView.setLayoutParams(layoutParams);
-                    }
-                    if (height >= 0) {
-                        ViewGroup.LayoutParams layoutParams = popupView.getLayoutParams();
-                        layoutParams.height = height;
-                        popupView.setLayoutParams(layoutParams);
-                    }
+            blackOverlay.setOnClickListener(this);
 
-                    if(popupView instanceof DraggableView) {
-                        DraggableView draggableView = (DraggableView) popupView;
+            popupView = (ViewGroup) LayoutInflater.from(activity).inflate(
+                    draggable ? R.layout.popup_layout_draggable : R.layout.popup_layout,
+                    activityView, false);
 
-                        draggableView.setDraggable(false);
-                        draggableView.setInlineMove(inlineMove);
-                        draggableView.setVertical(true);
-                        draggableView.setListenVelocity(false);
-                        draggableView.setMaxDragPercentageY(0.35f);
+            if (popupView != null) {
+                ViewGroup.LayoutParams layoutParams = popupView.getLayoutParams();
+                if (width >= 0) layoutParams.width = width;
+                if (height >= 0) layoutParams.height = height;
+                popupView.setLayoutParams(layoutParams);
 
-                        if (scaleDownCloseOnDrag) {
-                            draggableView.setViewAnimator(new ReturnOriginViewAnimator() {
+                if (popupView instanceof DraggableView) {
+                    DraggableView draggableView = (DraggableView) popupView;
+
+                    draggableView.setDraggable(false);
+                    draggableView.setInlineMove(inlineMove);
+                    draggableView.setVertical(true);
+                    draggableView.setListenVelocity(false);
+                    draggableView.setMaxDragPercentageY(DRAGGABLE_VIEW_MAX_DRAG_PERCENTAGE_Y);
+
+                    draggableView.setViewAnimator(scaleDownCloseOnDrag ?
+                            new ReturnOriginViewAnimator() {
                                 @Override
-                                public boolean animateExit(@NonNull DraggableView draggableView, Direction direction, int duration) {
+                                public boolean animateExit(@NonNull DraggableView draggableView,
+                                                           Direction direction, int duration) {
                                     close(true);
                                     return true;
                                 }
-                            });
-                        } else {
-                            draggableView.setViewAnimator(new ExitViewAnimator() {
-                            });
-                        }
-                        draggableView.setDragListener(new DraggableViewListener(this));
-                    }
-                    popupView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
+                            } :
+                            new ExitViewAnimator() {
+                            }
+                    );
+                    draggableView.setDragListener(new DraggableViewListener(this));
+                }
+                popupView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
-                        }
-                    });
-                    popupViewContent = (ViewGroup) popupView.findViewById(R.id.content);
-                    if (!shadow) {
-                        popupView.setBackgroundColor(popupBackgroundColor);
-                    } else {
-                        if (popupBackgroundColor != null && popupViewContent != null) {
-                            popupViewContent.setBackgroundColor(popupBackgroundColor);
-                        }
-                        ViewCompat.setElevation(popupView, 6);
                     }
-                    if (contentLayout != null && popupViewContent != null) {
-                        if (contentLayout.getParent() != null) {
-                            ((ViewGroup) contentLayout.getParent()).removeView(contentLayout);
-                        }
-                        popupViewContent.addView(contentLayout);
+                });
+                popupViewContent = (ViewGroup) popupView.findViewById(R.id.content);
+                if (!shadow) {
+                    popupView.setBackgroundColor(popupBackgroundColor);
+                } else {
+                    if (popupBackgroundColor != null && popupViewContent != null) {
+                        popupViewContent.setBackgroundColor(popupBackgroundColor);
                     }
+                    ViewCompat.setElevation(popupView, POPUP_VIEW_BASE_ELEVATION);
+                }
+                if (contentLayout != null && popupViewContent != null) {
+                    if (contentLayout.getParent() != null) {
+                        ((ViewGroup) contentLayout.getParent()).removeView(contentLayout);
+                    }
+                    popupViewContent.addView(contentLayout);
+                }
 
-                    DurX.putOn(popupView)
+                DurX.putOn(popupView)
                         .pivotX(0f)
                         .pivotY(0f)
                         .invisible()
@@ -244,22 +242,27 @@ public class MaryPopup implements View.OnClickListener {
                             @Override
                             public void onSize(DurX durX) {
                                 if (viewOrigin != null) {
-                                    differenceScaleX = viewOrigin.getWidth() * 1.0f / popupView.getWidth();
+                                    int popupViewWidth = popupView.getWidth();
+
+                                    float viewOriginX = getX(viewOrigin);
+                                    float viewOriginY = getY(viewOrigin);
+
+                                    differenceScaleX = viewOrigin.getWidth() * 1.0f / popupViewWidth;
                                     differenceScaleY = viewOrigin.getHeight() * 1.0f / popupView.getHeight();
 
                                     float translationX;
                                     float translationY;
 
                                     if (center) {
-                                        differenceTranslationX = getX(viewOrigin);
-                                        differenceTranslationY = getY(viewOrigin);
-                                        translationX = activityView.getWidth() / 2 - popupView.getWidth() / 2;
+                                        differenceTranslationX = viewOriginX;
+                                        differenceTranslationY = viewOriginY;
+                                        translationX = activityView.getWidth() / 2 - popupViewWidth / 2;
                                         translationY = activityView.getHeight() / 2 - popupView.getHeight() / 2;
                                     } else {
-                                        differenceTranslationX = getX(viewOrigin) - getX(popupView);
-                                        differenceTranslationY = getY(viewOrigin) - getY(popupView);
-                                        translationX = getX(viewOrigin) - (popupView.getWidth() - viewOrigin.getWidth()) / 2f;
-                                        translationY = getY(viewOrigin) - getStatusBarHeight();
+                                        differenceTranslationX = viewOriginX - getX(popupView);
+                                        differenceTranslationY = viewOriginY - getY(popupView);
+                                        translationX = viewOriginX - (popupViewWidth - viewOrigin.getWidth()) / 2f;
+                                        translationY = viewOriginY - getStatusBarHeight();
                                     }
 
                                     DurX.putOn(popupView)
@@ -290,13 +293,12 @@ public class MaryPopup implements View.OnClickListener {
                                         .andPutOn(popupViewContent)
                                         .visible()
                                         .animate()
-                                        .startDelay(openDuration - 100)
+                                        .startDelay(openDuration - OPEN_DURATION_DELAY_OFFSET)
                                         .alpha(0f, 1f);
                                 }
                             }
                         });
                     activityView.addView(popupView);
-                }
             }
         }
     }
@@ -327,69 +329,51 @@ public class MaryPopup implements View.OnClickListener {
 
             isAnimating = true;
             if (withScaleDown) {
+                if (popupView != null) {
+                    float scaleX = viewOrigin.getWidth() * 1.0f / (popupView.getWidth() * ViewCompat.getScaleX(popupView));
+                    float scaleY = viewOrigin.getHeight() * 1.0f / (popupView.getHeight() * ViewCompat.getScaleY(popupView));
 
-                float scaleX = viewOrigin.getWidth() * 1.0f / (popupView.getWidth() * ViewCompat.getScaleX(popupView));
-                float scaleY = viewOrigin.getHeight() * 1.0f / (popupView.getHeight() * ViewCompat.getScaleY(popupView));
+                    float translationX = ViewCompat.getTranslationX(popupView);
+                    float translationY = ViewCompat.getTranslationY(popupView) - getStatusBarHeight();
 
-                float translationX;
-                float translationY;
+                    float xViewOrigin = getX(viewOrigin);
+                    float yViewOrigin = getY(viewOrigin);
 
-                if (center) {
-                    translationX = 0;
-                    translationY = 0;
-                } else {
-                    translationX = ViewCompat.getTranslationX(popupView);
-                    translationY = ViewCompat.getTranslationY(popupView) - getStatusBarHeight();
+                    float xPopupView = getX(popupView);
+                    float yPopupView = getY(popupView) - getStatusBarHeight();
+
+                    float tx = Math.abs(xPopupView - xViewOrigin);
+                    float ty = Math.abs(yPopupView - yViewOrigin);
+
+                    if (center) {
+                        translationX = 0;
+                        translationY = 0;
+
+                        tx *= (1f - scaleX);
+                        ty *= (1f - scaleY);
+                    }
+
+                    translationX += tx;
+                    translationY += ty;
+
+                    DurX.putOn(popupViewContent)
+                        .animate()
+                        .alpha(0f)
+                        .duration(closeDuration)
+
+                        .andAnimate(popupView)
+                        .scaleX(scaleX)
+                        .scaleY(scaleY)
+                        .alpha(0f)
+                        .translationX(translationX)
+                        .translationY(translationY)
+                        .duration(closeDuration)
+
+                        .andAnimate(blackOverlay)
+                        .alpha(0f)
+                        .duration(closeDuration)
+                        .end(clearListener);
                 }
-
-                float xViewOrigin = getX(viewOrigin);
-                float yViewOrigin = getY(viewOrigin);
-
-                float xPopupView = getX(popupView);
-                float yPopupView = getY(popupView) - getStatusBarHeight();
-
-                float tx = 0;
-                if (xViewOrigin < xPopupView) {
-                    tx = xPopupView - xViewOrigin;
-                } else { // xViewOrigin > xPopupView
-                    tx = xViewOrigin - xPopupView;
-                }
-
-                if (center) {
-                    tx *= (1f - scaleX);
-                }
-                translationX += tx;
-
-                float ty = 0;
-                if (yViewOrigin < yPopupView) {
-                    ty = yPopupView - yViewOrigin;
-                } else { // yViewOrigin > yPopupView
-                    ty = yViewOrigin - yPopupView;
-                }
-
-                if (center) {
-                    ty *= (1f - scaleY);
-                }
-                translationY += ty;
-
-                DurX.putOn(popupViewContent)
-                    .animate()
-                    .alpha(0f)
-                    .duration(closeDuration)
-
-                    .andAnimate(popupView)
-                    .scaleX(scaleX)
-                    .scaleY(scaleY)
-                    .alpha(0f)
-                    .translationX(translationX)
-                    .translationY(translationY)
-                    .duration(closeDuration)
-
-                    .andAnimate(blackOverlay)
-                    .alpha(0f)
-                    .duration(closeDuration)
-                    .end(clearListener)
-                ;
             } else {
                 DurX.putOn(blackOverlay)
                     .animate()
@@ -424,23 +408,20 @@ public class MaryPopup implements View.OnClickListener {
     }
 
     float getY(View view) {
-        Rect rect = new Rect();
-        view.getGlobalVisibleRect(rect);
-        float y = rect.top;
-        if (y <= 0) {
-            y = ViewCompat.getY(view);
-        }
-        return y;
+        return getLocation(view, false);
     }
 
     float getX(View view) {
+        return getLocation(view, true);
+    }
+
+    private float getLocation(View view, boolean getX) {
         Rect rect = new Rect();
         view.getGlobalVisibleRect(rect);
-        float x = rect.left;
-        if (x <= 0) {
-            x = ViewCompat.getX(view);
-        }
-        return x;
+
+        return getX ?
+                (rect.left > 0 ? rect.left : ViewCompat.getX(view)) :
+                (rect.top > 0 ? rect.top : ViewCompat.getY(view));
     }
 
     static class DraggableViewListener extends DraggableView.DraggableViewListenerAdapter {
@@ -459,16 +440,15 @@ public class MaryPopup implements View.OnClickListener {
             if (popup != null && !popup.isAnimating) {
                 float percent = 1f - Math.abs(percentY);
 
+                DurX durX = DurX.putOn(popup.popupView);
+
                 if (popup.fadeOutDragging) {
-                    DurX.putOn(popup.popupView)
-                        .alpha(percent);
+                    durX.alpha(percent);
                 }
 
                 if (popup.scaleDownDragging) {
-                    float scale = Math.max(0.75f, percent);
-                    DurX.putOn(popup.popupView)
-                        .pivotX(0.5f)
-                        .scale(scale);
+                    float scale = Math.max(SCALE_DOWN_DRAGGING_MAX_PERCENTAGE, percent);
+                    durX.pivotX(DURX_PIVOT_X_PERCENTAGE).scale(scale);
                 }
             }
         }
